@@ -33,7 +33,7 @@ public class SkeletonVisualizer {
 		// Hip (root)
 		Segment hip = new Segment(0, Math.toRadians(0));
 		// Torso
-		Segment torso = new Segment(120, Math.toRadians(-90)); // Upwards, in screen coordinates, Y is down
+		Segment torso = new Segment(80, Math.toRadians(-90)); // Upwards, in screen coordinates, Y is down
 		hip.addChild(torso);
 		// Neck
 		Segment neck = new Segment(40, Math.toRadians(0));
@@ -43,8 +43,25 @@ public class SkeletonVisualizer {
 		Segment rightUpperArm = new Segment(80, Math.toRadians(-90));
 		torso.addChild(leftUpperArm);
 		torso.addChild(rightUpperArm);
-		Segment leftForearm = new Segment(70, Math.toRadians(-20));
-		Segment rightForearm = new Segment(70, Math.toRadians(20));
+		
+		Segment leftForearm = new Segment(70, Math.toRadians(-50));
+		Segment leftFinger1 = new Segment(5, Math.toRadians(-20));
+		Segment leftFinger2 = new Segment(5, Math.toRadians(0));
+		Segment leftFinger3 = new Segment(5, Math.toRadians(20));
+		leftForearm.addChild(leftFinger1);
+		leftForearm.addChild(leftFinger2);
+		leftForearm.addChild(leftFinger3);
+		
+		
+		Segment rightForearm = new Segment(70, Math.toRadians(50));
+		Segment rightFinger1 = new Segment(5, Math.toRadians(20));
+		Segment rightFinger2 = new Segment(5, Math.toRadians(0));
+		Segment rightFinger3 = new Segment(5, Math.toRadians(-20));
+		rightForearm.addChild(rightFinger1);
+		rightForearm.addChild(rightFinger2);
+		rightForearm.addChild(rightFinger3);
+
+		
 		leftUpperArm.addChild(leftForearm);
 		rightUpperArm.addChild(rightForearm);
 		// Legs

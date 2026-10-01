@@ -26,11 +26,45 @@ public class ForwardKinematics {
 	 */
 	// Public method: returns the root of the position tree
 	public static Node computePositions(Segment root, double originX, double originY) {
-		// TODO: Implemente este método
+		double accumulatedAngle = 0;
+		return computePositions(root, originX, originY,accumulatedAngle);
+		 
 	}
 
 	// Private helper method that implements the recursive algorithm
 	private static Node computePositions(Segment link, double baseX, double baseY, double accumulatedAngle) {
-		// TODO: Implemente este método
+		long startTime = System.nanoTime();
+		
+	// 1. CÓDIGO GENERAL: Se ejecuta en todas las llamadas
+		
+		// Actualizamos el ángulo acumulado sumando el ángulo del segmento actual
+		accumulatedAngle += link.getAngle();
+		
+		//Calculamos las cordenadas del nodo al final de este segmento X e Y
+		double x1 = baseX + link.getLength() * Math.cos(accumulatedAngle);
+		double y1 = baseY + link.getLength() * Math.sin(accumulatedAngle);
+		
+		//Construimos el nuevo nodo
+		Node currentNode = new Node(x1,y1);
+		
+	// 2. CÓDIGO RECURSIVO / CASO BASE
+		
+		//Si la lista está vacía (sin hijos) no entra en el bucle - CASO BASE!!
+		for(Segment childSegment : link.getChildren()) {
+			
+			//llama a la recursividad
+			Node childNode = computePositions(childSegment, baseX, baseY, accumulatedAngle);
+			// Añadimos el nodo a la lista de hijos de su nodoPadre
+			currentNode.addChild(childNode);
+		}
+		
+		long runningTime = System.nanoTime()- startTime;
+		System.out.println("Tiempo de computePositions para un segmento con "
+		+ link.getChildren().size() + " hijos: "
+		+ runningTime + " nanosegundos");
+		
+	// Devolvemos el nodo (no la lista de hijos ni un Segment)
+	return currentNode;	
+		
 	}
 }

@@ -55,8 +55,9 @@ public class SkeletonPanel extends JPanel {
 		drawSkeleton(g, originX, originY, nodeRoot);
 	}
 
+	// Pinta en pantalla cada uno de los Nodes de los que se compone el dibujo de un exoesqueleto
 	private void drawSkeleton(Graphics g, double parentX, double parentY, Node node) {
-		// TODO: Ponga comentarios en este método
+
 		g.fillOval((int) node.getX() - 4, (int) node.getY() - 4, 8, 8);
 		g.drawLine((int) parentX, (int) parentY, (int) node.getX(), (int) node.getY());
 		if (node.getChildren().size() == 0) {
